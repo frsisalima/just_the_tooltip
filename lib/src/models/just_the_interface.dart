@@ -139,6 +139,13 @@ abstract class JustTheInterface extends StatefulWidget {
   /// by using [controller.hideTooltip].
   bool get barrierDismissible;
 
+  /// The option to hide the tooltip.
+  ///
+  /// If [hideImmediately] is true, then tooltip might be hidden hide immediately
+  /// by clicking outside tooltip. True is default.
+  /// by using [_handlePointerEvent].
+  bool get hideImmediately;
+  
   /// Whether the tooltip should provide acoustic and/or haptic feedback.
   ///
   /// For example, on Android a tap will produce a clicking sound and a
