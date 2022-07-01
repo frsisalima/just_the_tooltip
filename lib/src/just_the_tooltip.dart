@@ -35,6 +35,7 @@ class JustTheTooltip extends StatefulWidget implements JustTheInterface {
     this.showDuration,
     this.triggerMode,
     this.barrierDismissible = true,
+    this.hideImmediately = false,
     this.enableFeedback,
     this.hoverShowDuration,
     this.fadeInDuration = const Duration(milliseconds: 150),
@@ -84,6 +85,9 @@ class JustTheTooltip extends StatefulWidget implements JustTheInterface {
 
   @override
   final bool barrierDismissible;
+  
+  @override
+  final bool hideImmediately;
 
   @override
   final TooltipTriggerMode? triggerMode;
@@ -310,6 +314,7 @@ abstract class JustTheTooltipState<T> extends State<JustTheInterface>
   late TooltipTriggerMode triggerMode;
   late bool enableFeedback;
   late bool barrierDismissible;
+  late bool hideImmediately;
 
   // These properties are specific to just_the_tooltip
   // static const Curve _defaultAnimateCurve = Curves.linear;
@@ -530,7 +535,7 @@ abstract class JustTheTooltipState<T> extends State<JustTheInterface>
     if (event is PointerUpEvent || event is PointerCancelEvent) {
       _hideTooltip();
     } else if (event is PointerDownEvent) {
-      _hideTooltip(immediately: true);
+      _hideTooltip(immediately:  hideImmediately);
     }
   }
 
@@ -601,6 +606,7 @@ abstract class JustTheTooltipState<T> extends State<JustTheInterface>
         tooltipTheme.enableFeedback ??
         _defaultEnableFeedback;
     barrierDismissible = widget.barrierDismissible;
+    hideImmediately = widget.hideImmediately;
 
     Widget result;
 
