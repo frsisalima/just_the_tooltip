@@ -18,6 +18,7 @@ class JustTheTooltipEntry extends StatefulWidget implements JustTheInterface {
     this.showDuration,
     this.triggerMode,
     this.barrierDismissible = true,
+    this.hideImmediately = true,
     this.enableFeedback,
     this.hoverShowDuration,
     this.fadeInDuration = const Duration(milliseconds: 150),
@@ -71,6 +72,9 @@ class JustTheTooltipEntry extends StatefulWidget implements JustTheInterface {
   @override
   final bool barrierDismissible;
 
+  @override
+  final bool hideImmediately;
+  
   @override
   final bool? enableFeedback;
 
