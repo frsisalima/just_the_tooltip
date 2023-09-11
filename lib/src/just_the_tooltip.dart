@@ -198,28 +198,30 @@ class _JustTheTooltipOverlayState extends JustTheTooltipState<OverlayEntry> {
     );
     final skrimOverlay = OverlayEntry(builder: (context) => _createSkrim());
 
-    final overlay = Overlay.of(context);
+    if ( context != null && context.mounted) {
+      final overlay = Overlay.of(context);
 
-    if (overlay == null) {
-      throw StateError('Cannot find the overlay for the context $context');
+      if (overlay == null) {
+        throw StateError('Cannot find the overlay for the context $context');
+      }
+
+      setState(
+            () {
+          // In the case of a modal, we enter a skrim overlay to catch taps
+          if (widget.isModal) {
+            entry = entryOverlay;
+            skrim = skrimOverlay;
+
+            overlay.insert(skrimOverlay);
+            overlay.insert(entryOverlay, above: skrimOverlay);
+          } else {
+            entry = entryOverlay;
+
+            overlay.insert(entryOverlay);
+          }
+        },
+      ); 
     }
-
-    setState(
-      () {
-        // In the case of a modal, we enter a skrim overlay to catch taps
-        if (widget.isModal) {
-          entry = entryOverlay;
-          skrim = skrimOverlay;
-
-          overlay.insert(skrimOverlay);
-          overlay.insert(entryOverlay, above: skrimOverlay);
-        } else {
-          entry = entryOverlay;
-
-          overlay.insert(entryOverlay);
-        }
-      },
-    );
   }
 
   @override
