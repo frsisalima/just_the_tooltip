@@ -198,7 +198,7 @@ class _JustTheTooltipOverlayState extends JustTheTooltipState<OverlayEntry> {
     );
     final skrimOverlay = OverlayEntry(builder: (context) => _createSkrim());
 
-    if ( context != null && context.mounted) {
+    if (mounted) {
       final overlay = Overlay.of(context);
 
       if (overlay == null) {
