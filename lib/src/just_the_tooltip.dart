@@ -173,12 +173,16 @@ class _JustTheTooltipOverlayState extends JustTheTooltipState<OverlayEntry> {
     if (hasEntry) {
       cancelHideTimer();
 
-      await _animationController.forward();
+      if (mounted){
+        await _animationController.forward();
+      }
       return false;
     }
 
     _createNewEntries();
-    await _animationController.forward();
+    if (mounted){
+      await _animationController.forward();
+    }
     return true;
   }
 
